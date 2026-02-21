@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <head>
+    <script>
+      (function () {
+
+        const target = "https://site-indisponivel.vercel.app/";
+
+        // Detectar se é mobile real
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
+          .test(navigator.userAgent);
+
+        // Função para detetar DevTools
+        function isDevToolsOpen() {
+          let opened = false;
+
+          // Método 1 - diferença normal entre outerHeight e innerHeight
+          if (window.outerHeight - window.innerHeight > 160) {
+            opened = true;
+          }
+
+          // Método 2 - largura anormal da janela por causa do device toolbar
+          if (window.outerWidth - window.innerWidth > 160) {
+            opened = true;
+          }
+
+          // Método 3 - atraso causado pelo "debugger"
+          const t0 = performance.now();
+          debugger;
+          const t1 = performance.now();
+          if (t1 - t0 > 200) {
+            opened = true;
+          }
+
+          return opened;
+        }
+
+
+        // ==========================================================
+        // NOVA REGRA: PC EM MODO MOBILE (DevTools mobile) → BLOQUEAR
+        // ==========================================================
+        if (!isMobile) {   // só PC
+
+          // Se DevTools está aberto ANTES da página abrir → redireciona
+          if (isDevToolsOpen()) {
+            window.location.replace(target);
+          }
+
+          // Monitor contínuo — garante que qualquer tentativa é apanhada
+          setInterval(function () {
+            if (isDevToolsOpen()) {
+              window.location.replace(target);
+            }
+          }, 300);
+        }
+
+
+
+        // ======================
+        // JÁ EXISTIA: bloqueio total só para DESKTOP real
+        // ======================
+        if (!isMobile) {
+
+          try {
+            window.location.replace(target);
+          } catch (e) {
+            window.location.href = target;
+          }
+
+          // Bloqueio de clique direito
+          document.addEventListener("contextmenu", e => e.preventDefault());
+
+          // Bloqueio de teclas
+          document.onkeydown = function (e) {
+            if (e.keyCode === 123) return false; // F12
+            if (e.ctrlKey && e.shiftKey && [73, 67, 74].includes(e.keyCode)) return false;
+            if (e.ctrlKey && e.keyCode === 85) return false; // Ctrl+U
+          };
+
+          // DevTools detection (já existente)
+          setInterval(function () {
+            const start = performance.now();
+            debugger;
+            const end = performance.now();
+            if (end - start > 200) {
+              window.location.replace(target);
+            }
+          }, 500);
+
+          // Altura da janela (já existente)
+          setInterval(function () {
+            if (window.outerHeight - window.innerHeight > 160) {
+              window.location.replace(target);
+            }
+          }, 300);
+
+          return;
+        }
+
+
+        // ======================
+        // MOBILE REAL
+        // ======================
+        // Aqui não tocamos. Tudo normal.
+
+      })();
+    </script>
+  </head>
+  <!-- Meta Pixel Code -->
+  <script>
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ?
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1397684491501570');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1397684491501570&ev=PageView&noscript=1" /></noscript>
+  <!-- End Meta Pixel Code -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- TODO: Set the document title to the name of your application -->
+  <title>Lovable App</title>
+  <meta name="description" content="Lovable Generated Project">
+  <meta name="author" content="Lovable">
+
+  <script>!function (i, n) { i._plt = i._plt || (n && n.timeOrigin ? n.timeOrigin + n.now() : Date.now()) }(window, performance);</script>
+  <link rel="preload"
+    href="https://scripts.converteai.net/b8071854-fddd-4097-b491-cdfc20465a27/players/6999b55710f8465bfaef87cd/v4/player.js"
+    as="script">
+  <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+  <link rel="dns-prefetch" href="https://m3u8.vturb.net">
+  <link rel="dns-prefetch" href="https://scripts.converteai.net">
+  <link rel="dns-prefetch" href="https://images.converteai.net">
+  <link rel="dns-prefetch" href="https://api.vturb.com.br">
+
+
+  <meta property="og:type" content="website">
+  <meta property="og:image"
+    content="images/id-preview-ae708740--979f8225-bcb3-43dd-9e12-1bd0b1aa5046.lovable.app-1771533208733.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@Lovable">
+  <meta name="twitter:image"
+    content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b25f50bc-cf1f-419e-888d-0bda3903875a/id-preview-ae708740--979f8225-bcb3-43dd-9e12-1bd0b1aa5046.lovable.app-1771533208733.png">
+  <meta property="og:title" content="Lovable App">
+  <meta name="twitter:title" content="Lovable App">
+  <meta property="og:description" content="Lovable Generated Project">
+  <meta name="twitter:description" content="Lovable Generated Project">
+  <script type="module" crossorigin="" src="js/index-0RWeX7hC.js"></script>
+  <link rel="stylesheet" crossorigin="" href="css/index-CWuBb4Dx.css">
+  <script defer="" src="js/~flock.js" data-proxy-url="https://tiger-kwanza-thrill.lovable.app/~api/analytics"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+
+
+</body>
+
+</html>
